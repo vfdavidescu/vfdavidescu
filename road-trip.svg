@@ -1,0 +1,43 @@
+<svg viewBox="0 0 900 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated car on a roadside">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8fc7f2"/>
+      <stop offset="100%" stop-color="#e6f4fb"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="200" fill="url(#sky)"/>
+  <circle cx="800" cy="34" r="20" fill="#ffd85e"/>
+
+  <g fill="#ffffff" opacity="0.95">
+    <g>
+      <ellipse cx="0" cy="0" rx="28" ry="11"/>
+      <ellipse cx="22" cy="-6" rx="17" ry="8"/>
+      <animateTransform attributeName="transform" type="translate" values="940 28; -120 28" dur="26s" begin="0s" repeatCount="indefinite"/>
+    </g>
+    <g>
+      <ellipse cx="0" cy="0" rx="20" ry="8"/>
+      <ellipse cx="16" cy="-4" rx="13" ry="6"/>
+      <animateTransform attributeName="transform" type="translate" values="940 48; -120 48" dur="34s" begin="-12s" repeatCount="indefinite"/>
+    </g>
+  </g>
+
+  <rect y="108" width="900" height="92" fill="#79a15c"/>
+  <rect y="142" width="900" height="44" fill="#3a3d40"/>
+  <rect y="142" width="900" height="4" fill="#55585b"/>
+  <rect y="182" width="900" height="4" fill="#55585b"/>
+
+  <line x1="0" y1="164" x2="900" y2="164" stroke="#f4f4f4" stroke-width="5" stroke-dasharray="38 28">
+    <animate attributeName="stroke-dashoffset" from="0" to="132" dur="0.9s" repeatCount="indefinite"/>
+  </line>
+
+  <g transform="translate(260,165)">
+    <g>
+      <animateTransform attributeName="transform" type="translate" values="-8 0; 8 0; -8 0" keyTimes="0; 0.5; 1" calcMode="spline" keySplines="0.42 0 0.58 1; 0.42 0 0.58 1" dur="4.5s" repeatCount="indefinite"/>
+      <g>
+        <animateTransform attributeName="transform" type="translate" values="0 0; 0 -1; 0 0; 0 -0.7; 0 0" dur="0.6s" repeatCount="indefinite" additive="sum"/>
+        <image href="assets/car.png" x="-95" y="-70" width="190" height="70" preserveAspectRatio="xMidYMid meet"/>
+      </g>
+    </g>
+  </g>
+</svg>
