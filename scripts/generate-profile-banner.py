@@ -1,10 +1,35 @@
+import argparse
 import base64
 import os
+import random
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 WIDTH, HEIGHT = 900, 200
 
-SKY_TOP = "#8fc7f2"
-SKY_BOTTOM = "#e6f4fb"
+TIMEZONE = os.environ.get("TIMEZONE", "Europe/Bucharest")
+NIGHT_START_HOUR = 20  # 8pm
+NIGHT_END_HOUR = 7     # 7am
+
+PHASES = {
+    "day": dict(
+        sky_top="#8fc7f2",
+        sky_bottom="#e6f4fb",
+        grass_color="#79a15c",
+        road_color="#3a3d40",
+        road_edge_color="#55585b",
+        lane_color="#f4f4f4",
+    ),
+    "night": dict(
+        sky_top="#0b1226",
+        sky_bottom="#2a3a5c",
+        grass_color="#233626",
+        road_color="#1c1d1f",
+        road_edge_color="#33353a",
+        lane_color="#c9c9c9",
+    ),
+}
+
 SUN = dict(cx=800, cy=34, r=20, fill="#ffd85e")
 
 CLOUDS = [
@@ -13,16 +38,25 @@ CLOUDS = [
 ]
 
 GRASS_Y = 108
-GRASS_COLOR = "#79a15c"
+
+
+def _generate_stars(count=60, seed=1337):
+    rng = random.Random(seed)
+    return [
+        dict(cx=round(rng.uniform(10, WIDTH - 10), 1),
+             cy=round(rng.uniform(6, GRASS_Y - 20), 1),
+             r=round(rng.uniform(0.8, 1.8), 1))
+        for _ in range(count)
+    ]
+
+
+STARS = _generate_stars()
 
 ROAD_Y = 142
 ROAD_HEIGHT = 44
-ROAD_COLOR = "#3a3d40"
-ROAD_EDGE_COLOR = "#55585b"
 ROAD_EDGE_HEIGHT = 4
 
 LANE_Y = ROAD_Y + ROAD_HEIGHT // 2
-LANE_COLOR = "#f4f4f4"
 LANE_WIDTH = 5
 LANE_DASH = "38 28"
 LANE_DUR = 0.9
@@ -41,12 +75,12 @@ CAR_BOUNCE_AMPLITUDES = [0, -1, 0, -0.7, 0]  # vertical suspension bounce keyfra
 CAR_BOUNCE_DUR = 0.6
 
 REPO_ROOT = os.path.join(os.path.dirname(__file__), "..")
-OUTPUT_PATH = os.path.join(REPO_ROOT, "road-trip.svg")
+OUTPUT_PATH = os.path.join(REPO_ROOT, "profile-banner..svg")
 
 
 def car_image_data_uri():
     # Inlined as a data: URI rather than a relative href: when GitHub displays this SVG via
-    # <img src="road-trip.svg">, the browser loads it in a locked-down "image" context that
+    # <img src="profile-banner.svg">, the browser loads it in a locked-down "image" context that
     # blocks the SVG from fetching any further external resources (a security restriction,
     # not a path bug) - so the car image has to be self-contained inside the SVG itself.
     image_path = os.path.join(REPO_ROOT, CAR_IMAGE)
@@ -54,23 +88,28 @@ def car_image_data_uri():
         encoded = base64.b64encode(f.read()).decode("ascii")
     return f"data:image/png;base64,{encoded}"
 
-def build_defs():
+def build_defs(phase):
     parts = [
         '  <defs>',
         '    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">',
-        f'      <stop offset="0%" stop-color="{SKY_TOP}"/>',
-        f'      <stop offset="100%" stop-color="{SKY_BOTTOM}"/>',
+        f'      <stop offset="0%" stop-color="{phase["sky_top"]}"/>',
+        f'      <stop offset="100%" stop-color="{phase["sky_bottom"]}"/>',
         '    </linearGradient>',
     ]
     parts.append('  </defs>')
     return "\n".join(parts)
 
 
-def build_sky_and_sun():
-    return "\n".join([
-        f'  <rect width="{WIDTH}" height="{HEIGHT}" fill="url(#sky)"/>',
-        f'  <circle cx="{SUN["cx"]}" cy="{SUN["cy"]}" r="{SUN["r"]}" fill="{SUN["fill"]}"/>',
-    ])
+def build_sky_and_sun(is_night):
+    parts = [f'  <rect width="{WIDTH}" height="{HEIGHT}" fill="url(#sky)"/>']
+    if is_night:
+        parts.append('  <g fill="#f2f0e6">')
+        for s in STARS:
+            parts.append(f'    <circle cx="{s["cx"]}" cy="{s["cy"]}" r="{s["r"]}"/>')
+        parts.append('  </g>')
+    else:
+        parts.append(f'  <circle cx="{SUN["cx"]}" cy="{SUN["cy"]}" r="{SUN["r"]}" fill="{SUN["fill"]}"/>')
+    return "\n".join(parts)
 
 
 def build_clouds():
@@ -88,19 +127,19 @@ def build_clouds():
     return "\n".join(parts)
 
 
-def build_ground():
+def build_ground(phase):
     return "\n".join([
-        f'  <rect y="{GRASS_Y}" width="{WIDTH}" height="{HEIGHT - GRASS_Y}" fill="{GRASS_COLOR}"/>',
-        f'  <rect y="{ROAD_Y}" width="{WIDTH}" height="{ROAD_HEIGHT}" fill="{ROAD_COLOR}"/>',
-        f'  <rect y="{ROAD_Y}" width="{WIDTH}" height="{ROAD_EDGE_HEIGHT}" fill="{ROAD_EDGE_COLOR}"/>',
-        f'  <rect y="{ROAD_Y + ROAD_HEIGHT - ROAD_EDGE_HEIGHT}" width="{WIDTH}" height="{ROAD_EDGE_HEIGHT}" fill="{ROAD_EDGE_COLOR}"/>',
+        f'  <rect y="{GRASS_Y}" width="{WIDTH}" height="{HEIGHT - GRASS_Y}" fill="{phase["grass_color"]}"/>',
+        f'  <rect y="{ROAD_Y}" width="{WIDTH}" height="{ROAD_HEIGHT}" fill="{phase["road_color"]}"/>',
+        f'  <rect y="{ROAD_Y}" width="{WIDTH}" height="{ROAD_EDGE_HEIGHT}" fill="{phase["road_edge_color"]}"/>',
+        f'  <rect y="{ROAD_Y + ROAD_HEIGHT - ROAD_EDGE_HEIGHT}" width="{WIDTH}" height="{ROAD_EDGE_HEIGHT}" fill="{phase["road_edge_color"]}"/>',
     ])
 
 
-def build_lane():
+def build_lane(phase):
     dash_from, dash_to = ("0", "132") if LANE_REVERSED else ("0", "-132")
     return "\n".join([
-        f'  <line x1="0" y1="{LANE_Y}" x2="{WIDTH}" y2="{LANE_Y}" stroke="{LANE_COLOR}" '
+        f'  <line x1="0" y1="{LANE_Y}" x2="{WIDTH}" y2="{LANE_Y}" stroke="{phase["lane_color"]}" '
         f'stroke-width="{LANE_WIDTH}" stroke-dasharray="{LANE_DASH}">',
         f'    <animate attributeName="stroke-dashoffset" from="{dash_from}" to="{dash_to}" '
         f'dur="{LANE_DUR}s" repeatCount="indefinite"/>',
@@ -128,19 +167,27 @@ def build_car():
     ])
 
 
-def build_svg():
+def is_night_now():
+    hour = datetime.now(ZoneInfo(TIMEZONE)).hour
+    return hour >= NIGHT_START_HOUR or hour < NIGHT_END_HOUR
+
+
+def build_svg(phase_name):
+    is_night = phase_name == "night"
+    phase = PHASES[phase_name]
+    label = "Animated car on a roadside at night" if is_night else "Animated car on a roadside"
     return "\n".join([
         f'<svg viewBox="0 0 {WIDTH} {HEIGHT}" xmlns="http://www.w3.org/2000/svg" role="img" '
-        f'aria-label="Animated car on a roadside">',
-        build_defs(),
+        f'aria-label="{label}">',
+        build_defs(phase),
         '',
-        build_sky_and_sun(),
+        build_sky_and_sun(is_night),
         '',
         build_clouds(),
         '',
-        build_ground(),
+        build_ground(phase),
         '',
-        build_lane(),
+        build_lane(phase),
         '',
         build_car(),
         '</svg>',
@@ -149,11 +196,21 @@ def build_svg():
 
 
 def main():
-    svg = build_svg()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--phase", choices=["day", "night", "auto"], default="auto",
+                         help=f"Force day/night, or auto-detect from the current time in {TIMEZONE}")
+    args = parser.parse_args()
+
+    if args.phase == "auto":
+        phase_name = "night" if is_night_now() else "day"
+    else:
+        phase_name = args.phase
+
+    svg = build_svg(phase_name)
     out_path = os.path.normpath(OUTPUT_PATH)
     with open(out_path, "w") as f:
         f.write(svg)
-    print(f"Wrote {out_path}")
+    print(f"Wrote {out_path} (phase={phase_name})")
 
 
 if __name__ == "__main__":
