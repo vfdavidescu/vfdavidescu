@@ -1,6 +1,3 @@
-<<<<<<< Updated upstream
-## Hi there 👋
-=======
 <div align="center">
 
 <img src="road-trip.svg" alt="Animated red Toyota Corolla on a roadside" width="100%"/>
@@ -9,4 +6,3 @@
 [![Email](https://img.shields.io/badge/Email-victor%40davidescu.me-555555?style=flat-square)](mailto:victor@davidescu.me)
 
 </div>
->>>>>>> Stashed changes

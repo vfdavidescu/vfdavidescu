@@ -1,3 +1,4 @@
+import base64
 import os
 
 WIDTH, HEIGHT = 900, 200
@@ -39,7 +40,19 @@ CAR_ROCK_DUR = 4.5       # seconds per full rock cycle
 CAR_BOUNCE_AMPLITUDES = [0, -1, 0, -0.7, 0]  # vertical suspension bounce keyframes
 CAR_BOUNCE_DUR = 0.6
 
-OUTPUT_PATH = os.path.join(os.path.dirname(__file__), "..", "road-trip.svg")
+REPO_ROOT = os.path.join(os.path.dirname(__file__), "..")
+OUTPUT_PATH = os.path.join(REPO_ROOT, "road-trip.svg")
+
+
+def car_image_data_uri():
+    # Inlined as a data: URI rather than a relative href: when GitHub displays this SVG via
+    # <img src="road-trip.svg">, the browser loads it in a locked-down "image" context that
+    # blocks the SVG from fetching any further external resources (a security restriction,
+    # not a path bug) - so the car image has to be self-contained inside the SVG itself.
+    image_path = os.path.join(REPO_ROOT, CAR_IMAGE)
+    with open(image_path, "rb") as f:
+        encoded = base64.b64encode(f.read()).decode("ascii")
+    return f"data:image/png;base64,{encoded}"
 
 def build_defs():
     parts = [
@@ -107,7 +120,7 @@ def build_car():
         '      <g>',
         f'        <animateTransform attributeName="transform" type="translate" values="{bounce_values}" '
         f'dur="{CAR_BOUNCE_DUR}s" repeatCount="indefinite" additive="sum"/>',
-        f'        <image href="{CAR_IMAGE}" x="{-CAR_DISPLAY_WIDTH // 2}" y="{-CAR_DISPLAY_HEIGHT}" '
+        f'        <image href="{car_image_data_uri()}" x="{-CAR_DISPLAY_WIDTH // 2}" y="{-CAR_DISPLAY_HEIGHT}" '
         f'width="{CAR_DISPLAY_WIDTH}" height="{CAR_DISPLAY_HEIGHT}" preserveAspectRatio="xMidYMid meet"/>',
         '      </g>',
         '    </g>',
