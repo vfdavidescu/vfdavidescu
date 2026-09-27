@@ -9,6 +9,17 @@
   <rect width="900" height="200" fill="url(#sky)"/>
   <circle cx="800" cy="34" r="20" fill="#ffd85e"/>
 
+  <g>
+    <g transform="translate(-480,0)">
+      <animateTransform attributeName="transform" type="translate" values="900 0; -480 0; -480 0" keyTimes="0; 0.7; 1" calcMode="linear" dur="35.37s" begin="0s" repeatCount="indefinite"/>
+      <polygon points="0,110.0 60,62.5 120,91.7 180,65.6 240,93.9 300,68.1 360,90.0 420,70.2 480,110.0" fill="#a9c0d4"/>
+    </g>
+    <g transform="translate(-480,0)">
+      <animateTransform attributeName="transform" type="translate" values="900 0; -480 0; -480 0" keyTimes="0; 0.511538; 1" calcMode="linear" dur="35.37s" begin="0s" repeatCount="indefinite"/>
+      <polygon points="0,110.0 60,87.6 120,103.9 180,85.8 240,103.4 300,85.7 360,105.1 420,84.8 480,110.0" fill="#8aa6bf"/>
+    </g>
+  </g>
+
   <g fill="#ffffff" opacity="0.95">
     <g>
       <ellipse cx="0" cy="0" rx="28" ry="11"/>
@@ -30,6 +41,298 @@
   <line x1="0" y1="164" x2="900" y2="164" stroke="#f4f4f4" stroke-width="5" stroke-dasharray="38 28">
     <animate attributeName="stroke-dashoffset" from="0" to="132" dur="0.9s" repeatCount="indefinite"/>
   </line>
+
+  <g>
+    <g transform="translate(-150,0)">
+      <animateTransform attributeName="transform" type="translate" values="1050 0; -150 0; -150 0" keyTimes="0; 0.4704; 1" calcMode="linear" dur="17.393s" begin="0.0s" repeatCount="indefinite"/>
+      <g transform="translate(0,135) scale(0.99)">
+        <g transform="translate(13.4,-2.6) scale(0.63)">
+        <rect x="-2.5" y="-9" width="5" height="9" fill="#5a4632"/>
+        <polygon points="-14,-6 14,-6 0,-25" fill="#2f6b3d"/>
+        <polygon points="-11,-16 11,-16 0,-33" fill="#2f6b3d"/>
+        <polygon points="-8,-26 8,-26 0,-41" fill="#2f6b3d"/>
+        </g>
+        <g transform="translate(22.5,-2.2) scale(0.68)">
+        <rect x="-2.5" y="-9" width="5" height="9" fill="#5a4632"/>
+        <polygon points="-14,-6 14,-6 0,-25" fill="#2f6b3d"/>
+        <polygon points="-11,-16 11,-16 0,-33" fill="#2f6b3d"/>
+        <polygon points="-8,-26 8,-26 0,-41" fill="#2f6b3d"/>
+        </g>
+        <g transform="translate(1.1,-1.8) scale(0.75)">
+        <rect x="-2.5" y="-9" width="5" height="9" fill="#5a4632"/>
+        <polygon points="-14,-6 14,-6 0,-25" fill="#2f6b3d"/>
+        <polygon points="-11,-16 11,-16 0,-33" fill="#2f6b3d"/>
+        <polygon points="-8,-26 8,-26 0,-41" fill="#2f6b3d"/>
+        </g>
+        <g transform="translate(-15.6,-1.2) scale(0.83)">
+        <rect x="-2.5" y="-9" width="5" height="9" fill="#5a4632"/>
+        <polygon points="-14,-6 14,-6 0,-25" fill="#2f6b3d"/>
+        <polygon points="-11,-16 11,-16 0,-33" fill="#2f6b3d"/>
+        <polygon points="-8,-26 8,-26 0,-41" fill="#2f6b3d"/>
+        </g>
+        <g transform="translate(-27.5,-0.5) scale(0.93)">
+        <rect x="-2.5" y="-9" width="5" height="9" fill="#5a4632"/>
+        <polygon points="-14,-6 14,-6 0,-25" fill="#2f6b3d"/>
+        <polygon points="-11,-16 11,-16 0,-33" fill="#2f6b3d"/>
+        <polygon points="-8,-26 8,-26 0,-41" fill="#2f6b3d"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(-150,0)">
+      <animateTransform attributeName="transform" type="translate" values="1050 0; -150 0; -150 0" keyTimes="0; 0.4704; 1" calcMode="linear" dur="17.393s" begin="1.241s" repeatCount="indefinite"/>
+      <g transform="translate(0,139) scale(0.99)">
+        <rect x="-2.5" y="-9" width="5" height="9" fill="#5a4632"/>
+        <polygon points="-14,-6 14,-6 0,-25" fill="#2f6b3d"/>
+        <polygon points="-11,-16 11,-16 0,-33" fill="#2f6b3d"/>
+        <polygon points="-8,-26 8,-26 0,-41" fill="#2f6b3d"/>
+      </g>
+    </g>
+    <g transform="translate(-150,0)">
+      <animateTransform attributeName="transform" type="translate" values="1050 0; -150 0; -150 0" keyTimes="0; 0.4704; 1" calcMode="linear" dur="17.393s" begin="2.327s" repeatCount="indefinite"/>
+      <g transform="translate(0,136) scale(0.96)">
+        <g transform="translate(-27.1,-2.1) scale(0.7)">
+        <rect x="-2.5" y="-9" width="5" height="9" fill="#5a4632"/>
+        <polygon points="-14,-6 14,-6 0,-25" fill="#2f6b3d"/>
+        <polygon points="-11,-16 11,-16 0,-33" fill="#2f6b3d"/>
+        <polygon points="-8,-26 8,-26 0,-41" fill="#2f6b3d"/>
+        </g>
+        <g transform="translate(5.3,-2.0) scale(0.72)">
+        <rect x="-2.5" y="-9" width="5" height="9" fill="#5a4632"/>
+        <polygon points="-14,-6 14,-6 0,-25" fill="#2f6b3d"/>
+        <polygon points="-11,-16 11,-16 0,-33" fill="#2f6b3d"/>
+        <polygon points="-8,-26 8,-26 0,-41" fill="#2f6b3d"/>
+        </g>
+        <g transform="translate(26.0,-1.8) scale(0.74)">
+        <rect x="-2.5" y="-9" width="5" height="9" fill="#5a4632"/>
+        <polygon points="-14,-6 14,-6 0,-25" fill="#2f6b3d"/>
+        <polygon points="-11,-16 11,-16 0,-33" fill="#2f6b3d"/>
+        <polygon points="-8,-26 8,-26 0,-41" fill="#2f6b3d"/>
+        </g>
+        <g transform="translate(-11.2,-0.6) scale(0.91)">
+        <rect x="-2.5" y="-9" width="5" height="9" fill="#5a4632"/>
+        <polygon points="-14,-6 14,-6 0,-25" fill="#2f6b3d"/>
+        <polygon points="-11,-16 11,-16 0,-33" fill="#2f6b3d"/>
+        <polygon points="-8,-26 8,-26 0,-41" fill="#2f6b3d"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(-150,0)">
+      <animateTransform attributeName="transform" type="translate" values="1050 0; -150 0; -150 0" keyTimes="0; 0.4704; 1" calcMode="linear" dur="17.393s" begin="3.863s" repeatCount="indefinite"/>
+      <g transform="translate(0,137) scale(0.9)">
+        <g transform="translate(25.9,-2.7) scale(0.62)">
+        <rect x="-2.5" y="-9" width="5" height="9" fill="#5a4632"/>
+        <polygon points="-14,-6 14,-6 0,-25" fill="#2f6b3d"/>
+        <polygon points="-11,-16 11,-16 0,-33" fill="#2f6b3d"/>
+        <polygon points="-8,-26 8,-26 0,-41" fill="#2f6b3d"/>
+        </g>
+        <g transform="translate(2.1,-2.4) scale(0.66)">
+        <rect x="-2.5" y="-9" width="5" height="9" fill="#5a4632"/>
+        <polygon points="-14,-6 14,-6 0,-25" fill="#2f6b3d"/>
+        <polygon points="-11,-16 11,-16 0,-33" fill="#2f6b3d"/>
+        <polygon points="-8,-26 8,-26 0,-41" fill="#2f6b3d"/>
+        </g>
+        <g transform="translate(-29.1,-1.6) scale(0.77)">
+        <rect x="-2.5" y="-9" width="5" height="9" fill="#5a4632"/>
+        <polygon points="-14,-6 14,-6 0,-25" fill="#2f6b3d"/>
+        <polygon points="-11,-16 11,-16 0,-33" fill="#2f6b3d"/>
+        <polygon points="-8,-26 8,-26 0,-41" fill="#2f6b3d"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(-150,0)">
+      <animateTransform attributeName="transform" type="translate" values="1050 0; -150 0; -150 0" keyTimes="0; 0.4704; 1" calcMode="linear" dur="17.393s" begin="4.878s" repeatCount="indefinite"/>
+      <g transform="translate(0,139) scale(0.83)">
+        <rect x="-5" y="-6" width="2" height="6" fill="#4a423c"/>
+        <rect x="2.5" y="-6" width="2" height="6" fill="#4a423c"/>
+        <ellipse cx="0" cy="-11" rx="9" ry="6" fill="#f2f0e6"/>
+        <circle cx="7.5" cy="-14.5" r="3.6" fill="#4a423c"/>
+      </g>
+    </g>
+    <g transform="translate(-150,0)">
+      <animateTransform attributeName="transform" type="translate" values="1050 0; -150 0; -150 0" keyTimes="0; 0.4704; 1" calcMode="linear" dur="17.393s" begin="6.311s" repeatCount="indefinite"/>
+      <g transform="translate(0,138) scale(1.0)">
+        <g transform="translate(5.2,-2.5) scale(0.64)">
+        <rect x="-2.5" y="-9" width="5" height="9" fill="#5a4632"/>
+        <polygon points="-14,-6 14,-6 0,-25" fill="#2f6b3d"/>
+        <polygon points="-11,-16 11,-16 0,-33" fill="#2f6b3d"/>
+        <polygon points="-8,-26 8,-26 0,-41" fill="#2f6b3d"/>
+        </g>
+        <g transform="translate(-27.3,-1.8) scale(0.74)">
+        <rect x="-2.5" y="-9" width="5" height="9" fill="#5a4632"/>
+        <polygon points="-14,-6 14,-6 0,-25" fill="#2f6b3d"/>
+        <polygon points="-11,-16 11,-16 0,-33" fill="#2f6b3d"/>
+        <polygon points="-8,-26 8,-26 0,-41" fill="#2f6b3d"/>
+        </g>
+        <g transform="translate(24.2,-0.8) scale(0.88)">
+        <rect x="-2.5" y="-9" width="5" height="9" fill="#5a4632"/>
+        <polygon points="-14,-6 14,-6 0,-25" fill="#2f6b3d"/>
+        <polygon points="-11,-16 11,-16 0,-33" fill="#2f6b3d"/>
+        <polygon points="-8,-26 8,-26 0,-41" fill="#2f6b3d"/>
+        </g>
+        <g transform="translate(-8.7,-0.6) scale(0.92)">
+        <rect x="-2.5" y="-9" width="5" height="9" fill="#5a4632"/>
+        <polygon points="-14,-6 14,-6 0,-25" fill="#2f6b3d"/>
+        <polygon points="-11,-16 11,-16 0,-33" fill="#2f6b3d"/>
+        <polygon points="-8,-26 8,-26 0,-41" fill="#2f6b3d"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(-150,0)">
+      <animateTransform attributeName="transform" type="translate" values="1050 0; -150 0; -150 0" keyTimes="0; 0.4704; 1" calcMode="linear" dur="17.393s" begin="7.59s" repeatCount="indefinite"/>
+      <g transform="translate(0,134) scale(0.82)">
+        <rect x="-2.5" y="-9" width="5" height="9" fill="#5a4632"/>
+        <polygon points="-14,-6 14,-6 0,-25" fill="#2f6b3d"/>
+        <polygon points="-11,-16 11,-16 0,-33" fill="#2f6b3d"/>
+        <polygon points="-8,-26 8,-26 0,-41" fill="#2f6b3d"/>
+      </g>
+    </g>
+    <g transform="translate(-150,0)">
+      <animateTransform attributeName="transform" type="translate" values="1050 0; -150 0; -150 0" keyTimes="0; 0.4704; 1" calcMode="linear" dur="17.393s" begin="8.592s" repeatCount="indefinite"/>
+      <g transform="translate(0,139) scale(0.91)">
+        <rect x="-5" y="-6" width="2" height="6" fill="#4a423c"/>
+        <rect x="2.5" y="-6" width="2" height="6" fill="#4a423c"/>
+        <ellipse cx="0" cy="-11" rx="9" ry="6" fill="#f2f0e6"/>
+        <circle cx="7.5" cy="-14.5" r="3.6" fill="#4a423c"/>
+      </g>
+    </g>
+    <g transform="translate(-150,0)">
+      <animateTransform attributeName="transform" type="translate" values="1050 0; -150 0; -150 0" keyTimes="0; 0.4704; 1" calcMode="linear" dur="17.393s" begin="9.999s" repeatCount="indefinite"/>
+      <g transform="translate(0,138) scale(1.15)">
+        <rect x="-2.5" y="-9" width="5" height="9" fill="#5a4632"/>
+        <polygon points="-14,-6 14,-6 0,-25" fill="#2f6b3d"/>
+        <polygon points="-11,-16 11,-16 0,-33" fill="#2f6b3d"/>
+        <polygon points="-8,-26 8,-26 0,-41" fill="#2f6b3d"/>
+      </g>
+    </g>
+    <g transform="translate(-150,0)">
+      <animateTransform attributeName="transform" type="translate" values="1050 0; -150 0; -150 0" keyTimes="0; 0.4704; 1" calcMode="linear" dur="17.393s" begin="10.982s" repeatCount="indefinite"/>
+      <g transform="translate(0,137) scale(0.9)">
+        <rect x="-2.5" y="-9" width="5" height="9" fill="#5a4632"/>
+        <polygon points="-14,-6 14,-6 0,-25" fill="#2f6b3d"/>
+        <polygon points="-11,-16 11,-16 0,-33" fill="#2f6b3d"/>
+        <polygon points="-8,-26 8,-26 0,-41" fill="#2f6b3d"/>
+      </g>
+    </g>
+    <g transform="translate(-150,0)">
+      <animateTransform attributeName="transform" type="translate" values="1050 0; -150 0; -150 0" keyTimes="0; 0.4704; 1" calcMode="linear" dur="17.393s" begin="12.323s" repeatCount="indefinite"/>
+      <g transform="translate(0,137) scale(1.11)">
+        <g transform="translate(-11.3,-2.4) scale(0.65)">
+        <rect x="-2.5" y="-9" width="5" height="9" fill="#5a4632"/>
+        <polygon points="-14,-6 14,-6 0,-25" fill="#2f6b3d"/>
+        <polygon points="-11,-16 11,-16 0,-33" fill="#2f6b3d"/>
+        <polygon points="-8,-26 8,-26 0,-41" fill="#2f6b3d"/>
+        </g>
+        <g transform="translate(23.0,-2.1) scale(0.7)">
+        <rect x="-2.5" y="-9" width="5" height="9" fill="#5a4632"/>
+        <polygon points="-14,-6 14,-6 0,-25" fill="#2f6b3d"/>
+        <polygon points="-11,-16 11,-16 0,-33" fill="#2f6b3d"/>
+        <polygon points="-8,-26 8,-26 0,-41" fill="#2f6b3d"/>
+        </g>
+        <g transform="translate(-29.8,-1.5) scale(0.78)">
+        <rect x="-2.5" y="-9" width="5" height="9" fill="#5a4632"/>
+        <polygon points="-14,-6 14,-6 0,-25" fill="#2f6b3d"/>
+        <polygon points="-11,-16 11,-16 0,-33" fill="#2f6b3d"/>
+        <polygon points="-8,-26 8,-26 0,-41" fill="#2f6b3d"/>
+        </g>
+        <g transform="translate(5.1,-0.6) scale(0.91)">
+        <rect x="-2.5" y="-9" width="5" height="9" fill="#5a4632"/>
+        <polygon points="-14,-6 14,-6 0,-25" fill="#2f6b3d"/>
+        <polygon points="-11,-16 11,-16 0,-33" fill="#2f6b3d"/>
+        <polygon points="-8,-26 8,-26 0,-41" fill="#2f6b3d"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(-150,0)">
+      <animateTransform attributeName="transform" type="translate" values="1050 0; -150 0; -150 0" keyTimes="0; 0.4704; 1" calcMode="linear" dur="17.393s" begin="13.335s" repeatCount="indefinite"/>
+      <g transform="translate(0,137) scale(1.12)">
+        <rect x="-2.5" y="-9" width="5" height="9" fill="#5a4632"/>
+        <polygon points="-14,-6 14,-6 0,-25" fill="#2f6b3d"/>
+        <polygon points="-11,-16 11,-16 0,-33" fill="#2f6b3d"/>
+        <polygon points="-8,-26 8,-26 0,-41" fill="#2f6b3d"/>
+      </g>
+    </g>
+    <g transform="translate(-150,0)">
+      <animateTransform attributeName="transform" type="translate" values="1050 0; -150 0; -150 0" keyTimes="0; 0.4704; 1" calcMode="linear" dur="17.393s" begin="14.367s" repeatCount="indefinite"/>
+      <g transform="translate(0,137) scale(0.83)">
+        <g transform="translate(-26.8,-2.0) scale(0.71)">
+        <rect x="-2.5" y="-9" width="5" height="9" fill="#5a4632"/>
+        <polygon points="-14,-6 14,-6 0,-25" fill="#2f6b3d"/>
+        <polygon points="-11,-16 11,-16 0,-33" fill="#2f6b3d"/>
+        <polygon points="-8,-26 8,-26 0,-41" fill="#2f6b3d"/>
+        </g>
+        <g transform="translate(-11.6,-1.6) scale(0.77)">
+        <rect x="-2.5" y="-9" width="5" height="9" fill="#5a4632"/>
+        <polygon points="-14,-6 14,-6 0,-25" fill="#2f6b3d"/>
+        <polygon points="-11,-16 11,-16 0,-33" fill="#2f6b3d"/>
+        <polygon points="-8,-26 8,-26 0,-41" fill="#2f6b3d"/>
+        </g>
+        <g transform="translate(29.9,-0.9) scale(0.87)">
+        <rect x="-2.5" y="-9" width="5" height="9" fill="#5a4632"/>
+        <polygon points="-14,-6 14,-6 0,-25" fill="#2f6b3d"/>
+        <polygon points="-11,-16 11,-16 0,-33" fill="#2f6b3d"/>
+        <polygon points="-8,-26 8,-26 0,-41" fill="#2f6b3d"/>
+        </g>
+        <g transform="translate(9.1,-0.8) scale(0.88)">
+        <rect x="-2.5" y="-9" width="5" height="9" fill="#5a4632"/>
+        <polygon points="-14,-6 14,-6 0,-25" fill="#2f6b3d"/>
+        <polygon points="-11,-16 11,-16 0,-33" fill="#2f6b3d"/>
+        <polygon points="-8,-26 8,-26 0,-41" fill="#2f6b3d"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(-150,0)">
+      <animateTransform attributeName="transform" type="translate" values="1050 0; -150 0; -150 0" keyTimes="0; 0.4704; 1" calcMode="linear" dur="17.393s" begin="15.699s" repeatCount="indefinite"/>
+      <g transform="translate(0,137) scale(1.14)">
+        <rect x="-2.5" y="-9" width="5" height="9" fill="#5a4632"/>
+        <polygon points="-14,-6 14,-6 0,-25" fill="#2f6b3d"/>
+        <polygon points="-11,-16 11,-16 0,-33" fill="#2f6b3d"/>
+        <polygon points="-8,-26 8,-26 0,-41" fill="#2f6b3d"/>
+      </g>
+    </g>
+  </g>
+
+  <g>
+    <g transform="translate(-150,0)">
+      <animateTransform attributeName="transform" type="translate" values="1050 0; -150 0; -150 0" keyTimes="0; 0.654545; 1" calcMode="linear" dur="12.5s" begin="0.0s" repeatCount="indefinite"/>
+      <rect x="-55.5" y="102" width="5" height="37" fill="#8a8d90"/>
+      <rect x="50.5" y="102" width="5" height="37" fill="#8a8d90"/>
+      <rect x="-69.5" y="54" width="139" height="48" rx="3" fill="#1f7a44" stroke="#f7f7f7" stroke-width="2"/>
+      <text x="0" y="74.5" text-anchor="middle" font-family="Verdana, DejaVu Sans, Geneva, sans-serif" font-size="13" font-weight="bold" letter-spacing="0.5" fill="#ffffff">ROAD TRIPPER</text>
+      <text x="0" y="90.5" text-anchor="middle" font-family="Verdana, DejaVu Sans, Geneva, sans-serif" font-size="13" font-weight="bold" letter-spacing="0.5" fill="#ffffff">BY WEEKEND</text>
+    </g>
+    <g transform="translate(-150,0)">
+      <animateTransform attributeName="transform" type="translate" values="1050 0; -150 0; -150 0" keyTimes="0; 0.654545; 1" calcMode="linear" dur="12.5s" begin="2.5s" repeatCount="indefinite"/>
+      <rect x="-55.5" y="102" width="5" height="37" fill="#8a8d90"/>
+      <rect x="50.5" y="102" width="5" height="37" fill="#8a8d90"/>
+      <rect x="-69.5" y="54" width="139" height="48" rx="3" fill="#1f7a44" stroke="#f7f7f7" stroke-width="2"/>
+      <text x="0" y="74.5" text-anchor="middle" font-family="Verdana, DejaVu Sans, Geneva, sans-serif" font-size="13" font-weight="bold" letter-spacing="0.5" fill="#ffffff">NEXT STOP</text>
+      <text x="0" y="90.5" text-anchor="middle" font-family="Verdana, DejaVu Sans, Geneva, sans-serif" font-size="13" font-weight="bold" letter-spacing="0.5" fill="#ffffff">ANYWHERE NEW</text>
+    </g>
+    <g transform="translate(-150,0)">
+      <animateTransform attributeName="transform" type="translate" values="1050 0; -150 0; -150 0" keyTimes="0; 0.654545; 1" calcMode="linear" dur="12.5s" begin="5.0s" repeatCount="indefinite"/>
+      <rect x="-60.0" y="102" width="5" height="37" fill="#8a8d90"/>
+      <rect x="55.0" y="102" width="5" height="37" fill="#8a8d90"/>
+      <rect x="-74.0" y="54" width="148" height="48" rx="3" fill="#1f7a44" stroke="#f7f7f7" stroke-width="2"/>
+      <text x="0" y="74.5" text-anchor="middle" font-family="Verdana, DejaVu Sans, Geneva, sans-serif" font-size="13" font-weight="bold" letter-spacing="0.5" fill="#ffffff">BASED IN</text>
+      <text x="0" y="90.5" text-anchor="middle" font-family="Verdana, DejaVu Sans, Geneva, sans-serif" font-size="13" font-weight="bold" letter-spacing="0.5" fill="#ffffff">CAMBRIDGE, UK</text>
+    </g>
+    <g transform="translate(-150,0)">
+      <animateTransform attributeName="transform" type="translate" values="1050 0; -150 0; -150 0" keyTimes="0; 0.654545; 1" calcMode="linear" dur="12.5s" begin="7.5s" repeatCount="indefinite"/>
+      <rect x="-64.0" y="102" width="5" height="37" fill="#8a8d90"/>
+      <rect x="59.0" y="102" width="5" height="37" fill="#8a8d90"/>
+      <rect x="-78.0" y="54" width="156" height="48" rx="3" fill="#1f7a44" stroke="#f7f7f7" stroke-width="2"/>
+      <text x="0" y="74.5" text-anchor="middle" font-family="Verdana, DejaVu Sans, Geneva, sans-serif" font-size="13" font-weight="bold" letter-spacing="0.5" fill="#ffffff">ONCE BUILT 2FA</text>
+      <text x="0" y="90.5" text-anchor="middle" font-family="Verdana, DejaVu Sans, Geneva, sans-serif" font-size="13" font-weight="bold" letter-spacing="0.5" fill="#ffffff">FOR A CAR</text>
+    </g>
+    <g transform="translate(-150,0)">
+      <animateTransform attributeName="transform" type="translate" values="1050 0; -150 0; -150 0" keyTimes="0; 0.654545; 1" calcMode="linear" dur="12.5s" begin="10.0s" repeatCount="indefinite"/>
+      <rect x="-55.5" y="102" width="5" height="37" fill="#8a8d90"/>
+      <rect x="50.5" y="102" width="5" height="37" fill="#8a8d90"/>
+      <rect x="-69.5" y="54" width="139" height="48" rx="3" fill="#1f7a44" stroke="#f7f7f7" stroke-width="2"/>
+      <text x="0" y="74.5" text-anchor="middle" font-family="Verdana, DejaVu Sans, Geneva, sans-serif" font-size="13" font-weight="bold" letter-spacing="0.5" fill="#ffffff">WINDOWS DOWN</text>
+      <text x="0" y="90.5" text-anchor="middle" font-family="Verdana, DejaVu Sans, Geneva, sans-serif" font-size="13" font-weight="bold" letter-spacing="0.5" fill="#ffffff">MUSIC UP</text>
+    </g>
+  </g>
 
   <g transform="translate(260,165)">
     <g>
