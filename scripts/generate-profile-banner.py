@@ -3,6 +3,7 @@ import base64
 import os
 import random
 from datetime import datetime
+from string import Template
 from zoneinfo import ZoneInfo
 
 WIDTH, HEIGHT = 900, 200
@@ -75,7 +76,22 @@ CAR_BOUNCE_AMPLITUDES = [0, -1, 0, -0.7, 0]  # vertical suspension bounce keyfra
 CAR_BOUNCE_DUR = 0.6
 
 REPO_ROOT = os.path.join(os.path.dirname(__file__), "..")
-OUTPUT_PATH = os.path.join(REPO_ROOT, "profile-banner..svg")
+OUTPUT_PATH = os.path.join(REPO_ROOT, "profile-banner.svg")
+TEMPLATES_DIR = os.path.join(os.path.dirname(__file__), "templates")
+
+_template_cache = {}
+
+
+def load_template(name):
+    if name not in _template_cache:
+        path = os.path.join(TEMPLATES_DIR, f"{name}.tpl")
+        with open(path) as f:
+            _template_cache[name] = Template(f.read())
+    return _template_cache[name]
+
+
+def render(name, **kwargs):
+    return load_template(name).substitute(**kwargs).rstrip("\n")
 
 
 def car_image_data_uri():
@@ -89,82 +105,63 @@ def car_image_data_uri():
     return f"data:image/png;base64,{encoded}"
 
 def build_defs(phase):
-    parts = [
-        '  <defs>',
-        '    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">',
-        f'      <stop offset="0%" stop-color="{phase["sky_top"]}"/>',
-        f'      <stop offset="100%" stop-color="{phase["sky_bottom"]}"/>',
-        '    </linearGradient>',
-    ]
-    parts.append('  </defs>')
-    return "\n".join(parts)
+    return render("defs", sky_top=phase["sky_top"], sky_bottom=phase["sky_bottom"])
 
 
 def build_sky_and_sun(is_night):
-    parts = [f'  <rect width="{WIDTH}" height="{HEIGHT}" fill="url(#sky)"/>']
     if is_night:
-        parts.append('  <g fill="#f2f0e6">')
-        for s in STARS:
-            parts.append(f'    <circle cx="{s["cx"]}" cy="{s["cy"]}" r="{s["r"]}"/>')
-        parts.append('  </g>')
-    else:
-        parts.append(f'  <circle cx="{SUN["cx"]}" cy="{SUN["cy"]}" r="{SUN["r"]}" fill="{SUN["fill"]}"/>')
-    return "\n".join(parts)
+        stars = "\n".join(render("star", cx=s["cx"], cy=s["cy"], r=s["r"]) for s in STARS)
+        return render("sky_night", width=WIDTH, height=HEIGHT, stars=stars)
+    return render("sky_day", width=WIDTH, height=HEIGHT, cx=SUN["cx"], cy=SUN["cy"], r=SUN["r"], fill=SUN["fill"])
 
 
 def build_clouds():
-    parts = ['  <g fill="#ffffff" opacity="0.95">']
-    for c in CLOUDS:
-        parts += [
-            '    <g>',
-            f'      <ellipse cx="0" cy="0" rx="{c["rx1"]}" ry="{c["ry1"]}"/>',
-            f'      <ellipse cx="{c["dx2"]}" cy="{c["dy2"]}" rx="{c["rx2"]}" ry="{c["ry2"]}"/>',
-            f'      <animateTransform attributeName="transform" type="translate" '
-            f'values="{WIDTH + 40} {c["y"]}; -120 {c["y"]}" dur="{c["dur"]}s" begin="{c["begin"]}s" repeatCount="indefinite"/>',
-            '    </g>',
-        ]
-    parts.append('  </g>')
-    return "\n".join(parts)
+    items = "\n".join(
+        render(
+            "cloud",
+            rx1=c["rx1"], ry1=c["ry1"], rx2=c["rx2"], ry2=c["ry2"],
+            dx2=c["dx2"], dy2=c["dy2"],
+            x_from=WIDTH + 40, x_to=-120, y=c["y"], dur=c["dur"], begin=c["begin"],
+        )
+        for c in CLOUDS
+    )
+    return render("clouds", items=items)
 
 
 def build_ground(phase):
-    return "\n".join([
-        f'  <rect y="{GRASS_Y}" width="{WIDTH}" height="{HEIGHT - GRASS_Y}" fill="{phase["grass_color"]}"/>',
-        f'  <rect y="{ROAD_Y}" width="{WIDTH}" height="{ROAD_HEIGHT}" fill="{phase["road_color"]}"/>',
-        f'  <rect y="{ROAD_Y}" width="{WIDTH}" height="{ROAD_EDGE_HEIGHT}" fill="{phase["road_edge_color"]}"/>',
-        f'  <rect y="{ROAD_Y + ROAD_HEIGHT - ROAD_EDGE_HEIGHT}" width="{WIDTH}" height="{ROAD_EDGE_HEIGHT}" fill="{phase["road_edge_color"]}"/>',
-    ])
+    return render(
+        "ground",
+        grass_y=GRASS_Y, grass_height=HEIGHT - GRASS_Y,
+        grass_color=phase["grass_color"],
+        road_y=ROAD_Y, road_height=ROAD_HEIGHT,
+        road_edge_height=ROAD_EDGE_HEIGHT,
+        road_bottom_edge_y=ROAD_Y + ROAD_HEIGHT - ROAD_EDGE_HEIGHT,
+        road_color=phase["road_color"], road_edge_color=phase["road_edge_color"],
+        width=WIDTH,
+    )
 
 
 def build_lane(phase):
     dash_from, dash_to = ("0", "132") if LANE_REVERSED else ("0", "-132")
-    return "\n".join([
-        f'  <line x1="0" y1="{LANE_Y}" x2="{WIDTH}" y2="{LANE_Y}" stroke="{phase["lane_color"]}" '
-        f'stroke-width="{LANE_WIDTH}" stroke-dasharray="{LANE_DASH}">',
-        f'    <animate attributeName="stroke-dashoffset" from="{dash_from}" to="{dash_to}" '
-        f'dur="{LANE_DUR}s" repeatCount="indefinite"/>',
-        '  </line>',
-    ])
+    return render(
+        "lane",
+        lane_y=LANE_Y, width=WIDTH, lane_color=phase["lane_color"],
+        lane_width=LANE_WIDTH, lane_dash=LANE_DASH,
+        dash_from=dash_from, dash_to=dash_to, lane_dur=LANE_DUR,
+    )
 
 
 def build_car():
     bounce_values = "; ".join(f"0 {v}" for v in CAR_BOUNCE_AMPLITUDES)
-    return "\n".join([
-        f'  <g transform="translate({CAR_ANCHOR_X},{CAR_ANCHOR_Y})">',
-        '    <g>',
-        f'      <animateTransform attributeName="transform" type="translate" '
-        f'values="-{CAR_ROCK_AMPLITUDE} 0; {CAR_ROCK_AMPLITUDE} 0; -{CAR_ROCK_AMPLITUDE} 0" '
-        f'keyTimes="0; 0.5; 1" calcMode="spline" keySplines="0.42 0 0.58 1; 0.42 0 0.58 1" '
-        f'dur="{CAR_ROCK_DUR}s" repeatCount="indefinite"/>',
-        '      <g>',
-        f'        <animateTransform attributeName="transform" type="translate" values="{bounce_values}" '
-        f'dur="{CAR_BOUNCE_DUR}s" repeatCount="indefinite" additive="sum"/>',
-        f'        <image href="{car_image_data_uri()}" x="{-CAR_DISPLAY_WIDTH // 2}" y="{-CAR_DISPLAY_HEIGHT}" '
-        f'width="{CAR_DISPLAY_WIDTH}" height="{CAR_DISPLAY_HEIGHT}" preserveAspectRatio="xMidYMid meet"/>',
-        '      </g>',
-        '    </g>',
-        '  </g>',
-    ])
+    return render(
+        "car",
+        anchor_x=CAR_ANCHOR_X, anchor_y=CAR_ANCHOR_Y,
+        rock_amplitude=CAR_ROCK_AMPLITUDE, rock_dur=CAR_ROCK_DUR,
+        bounce_values=bounce_values, bounce_dur=CAR_BOUNCE_DUR,
+        image_uri=car_image_data_uri(),
+        img_x=-CAR_DISPLAY_WIDTH // 2, img_y=-CAR_DISPLAY_HEIGHT,
+        img_width=CAR_DISPLAY_WIDTH, img_height=CAR_DISPLAY_HEIGHT,
+    )
 
 
 def is_night_now():
@@ -176,23 +173,16 @@ def build_svg(phase_name):
     is_night = phase_name == "night"
     phase = PHASES[phase_name]
     label = "Animated car on a roadside at night" if is_night else "Animated car on a roadside"
-    return "\n".join([
-        f'<svg viewBox="0 0 {WIDTH} {HEIGHT}" xmlns="http://www.w3.org/2000/svg" role="img" '
-        f'aria-label="{label}">',
-        build_defs(phase),
-        '',
-        build_sky_and_sun(is_night),
-        '',
-        build_clouds(),
-        '',
-        build_ground(phase),
-        '',
-        build_lane(phase),
-        '',
-        build_car(),
-        '</svg>',
-        '',
-    ])
+    return render(
+        "banner",
+        width=WIDTH, height=HEIGHT, label=label,
+        defs=build_defs(phase),
+        sky=build_sky_and_sun(is_night),
+        clouds=build_clouds(),
+        ground=build_ground(phase),
+        lane=build_lane(phase),
+        car=build_car(),
+    ) + "\n"
 
 
 def main():

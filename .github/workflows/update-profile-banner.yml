@@ -2,7 +2,7 @@ name: Update Profile Banner
 
 on:
   schedule:
-    - cron: "0 * * * *" # Run every hour
+    - cron: "0 */4 * * *" # Runs every 4 hours
   workflow_dispatch: {}
 
 permissions:
