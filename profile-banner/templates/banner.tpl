@@ -3,11 +3,17 @@ $defs
 
 $sky
 
+$mountains
+
 $clouds
 
 $ground
 
 $lane
+
+$scenery
+
+$signs
 
 $car
 </svg>

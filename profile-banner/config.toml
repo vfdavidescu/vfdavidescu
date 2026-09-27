@@ -1,0 +1,178 @@
+# Every tunable value for the banner lives here. generate.py only holds the drawing logic
+# and the values derived from these (road speed, lane position, sign baselines, and so on).
+
+[output]
+file = "banner.svg" # written next to this config
+
+[canvas]
+width = 900
+height = 200
+
+[phase]
+# Which palette to draw. The TIMEZONE environment variable overrides `timezone`.
+timezone = "Europe/Bucharest"
+night_start_hour = 20 # 8pm
+night_end_hour = 7
+
+[layout]
+grass_y = 108 # horizon: grass runs from here to the bottom
+road_y = 142
+road_height = 44
+road_edge_height = 4
+
+[road]
+# The lane dashes shift `dash_shift` px every `dash_dur` seconds, which IS the apparent speed
+# of the road. Everything meant to be standing still on the roadside (signs, trees, animals)
+# travels at exactly this speed, or it visually slides against the tarmac. Lower `dash_dur`
+# to speed the whole scene up; below ~0.3s per dash period the dashes start to strobe.
+dash_shift = 132
+dash_dur = 0.9
+lane_width = 5
+lane_dash = "38 28"
+lane_reversed = true # flow left-to-right, matching the car's travel direction
+
+[stars]
+count = 60
+seed = 1337
+
+[sun]
+cx = 800
+cy = 34
+r = 20
+fill = "#ffd85e"
+
+[[clouds]]
+y = 28
+dur = 26
+begin = 0
+rx1 = 28
+ry1 = 11
+rx2 = 17
+ry2 = 8
+dx2 = 22
+dy2 = -6
+
+[[clouds]]
+y = 48
+dur = 34
+begin = -12
+rx1 = 20
+ry1 = 8
+rx2 = 13
+ry2 = 6
+dx2 = 16
+dy2 = -4
+
+[car]
+image = "assets/car.png"
+aspect = 2.7150837988826816 # 486/179, width/height of the source image after cropping
+display_width = 190
+anchor_x = 260 # horizontal position on the banner; the car itself never moves
+rock_amplitude = 8 # px it rocks forward/back
+rock_dur = 4.5
+bounce_amplitudes = [0, -1, 0, -0.7, 0] # vertical suspension bounce keyframes
+bounce_dur = 0.6
+
+[mountains]
+# Distant ranges: the one thing that does NOT travel at road speed. Being far away they
+# drift slower, which is what sells the depth. Each range crosses and then leaves the
+# horizon empty, so the mountains come and go rather than being a permanent backdrop.
+seed = 19
+range_width = 480 # px from foot to foot of one range
+step = 60 # px between alternating valley/peak points
+visible_share = 0.7 # fraction of the cycle with mountains up; the rest is flat horizon
+
+# Both layers share one cycle and start together so they arrive as a single event. The
+# nearer range crosses faster and pulls ahead of the far one, keeping the parallax visible.
+[[mountains.layers]]
+color = "mountain_far"
+speed = 0.38 # multiple of road speed
+peak = [34, 54]
+valley = [12, 20]
+
+[[mountains.layers]]
+color = "mountain_near"
+speed = 0.52
+peak = [20, 36]
+valley = [4, 12]
+
+[signs]
+messages_file = "messages.json"
+font_family = "Verdana, DejaVu Sans, Geneva, sans-serif"
+font_size = 13
+char_width = 8.1 # approx advance width of bold Verdana at font_size
+letter_spacing = 0.5 # counted into the width estimate, or long lines crowd the border
+max_chars = 26 # per line
+line_height = 16
+pad_x = 18 # gap between the text and the board's white border
+pad_y = 8
+board_min_width = 96
+board_max_width = 240
+# Boards are anchored by their bottom edge and grow upward, so posts stay a constant length
+# whatever the message height. 102 clears the horizon (the board reads against sky).
+board_bottom_y = 102
+post_width = 5
+post_inset = 14 # how far each post sits in from the board edge
+post_base_offset = -3 # relative to road_y; posts plant on the verge, just above the tarmac
+travel_margin = 150 # fixed travel span either side, so every sign shares one pass duration
+# Seconds between one sign entering and the next. Shorter than a full pass, so several
+# signs share the view. Lower it for a denser roadside, raise it for a sparser one.
+spacing = 2.5
+
+[scenery]
+# Pine trees and grazing animals, travelling at road speed like the signs. The layout is
+# seeded so every run produces an identical SVG - otherwise CI would commit a new banner
+# on every single run.
+seed = 7
+count = 14
+gap = 1.4 # average seconds between objects
+gap_jitter = 0.45
+base_offset = -4 # relative to road_y; where objects plant on the verge
+base_jitter = [-4, 1]
+scale_range = [0.8, 1.15]
+# Dealt from a shuffled deck rather than picked independently, so the proportions hold;
+# independent picks happily produce a run of nine identical objects.
+kinds = ["pine", "pine", "pine", "grove", "grove", "grove", "sheep", "sheep"]
+
+[scenery.grove]
+size = [3, 5] # trees per cluster
+spread = 26 # px either side of the cluster's anchor
+scale_range = [0.6, 1.0]
+
+# Palettes. Keys are shared by both phases; `mountain_far` etc. are referenced by name
+# from [[mountains.layers]].
+[colors.day]
+sky_top = "#8fc7f2"
+sky_bottom = "#e6f4fb"
+grass = "#79a15c"
+mountain_far = "#a9c0d4"
+mountain_near = "#8aa6bf"
+road = "#3a3d40"
+road_edge = "#55585b"
+lane = "#f4f4f4"
+sign_board = "#1f7a44"
+sign_border = "#f7f7f7"
+sign_text = "#ffffff"
+sign_post = "#8a8d90"
+tree_foliage = "#2f6b3d"
+tree_trunk = "#5a4632"
+animal_light = "#f2f0e6"
+animal_dark = "#4a423c"
+
+[colors.night]
+sky_top = "#0b1226"
+sky_bottom = "#2a3a5c"
+grass = "#233626"
+mountain_far = "#1b2742"
+mountain_near = "#141d33"
+road = "#1c1d1f"
+road_edge = "#33353a"
+lane = "#c9c9c9"
+sign_board = "#14512f"
+sign_border = "#9fc7ae"
+sign_text = "#e8f5ec"
+sign_post = "#4a4d52"
+tree_foliage = "#0e2115" # darker than the night grass, so trees read as silhouettes
+tree_trunk = "#1d160f"
+animal_light = "#9fa39c"
+animal_dark = "#26221f"
